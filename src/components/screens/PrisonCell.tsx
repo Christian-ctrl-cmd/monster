@@ -110,7 +110,7 @@ const PrisonCell = () => {
       {/* Cell description */}
       <div className="absolute bottom-24 left-1/2 transform -translate-x-1/2 max-w-md bg-black bg-opacity-80 text-white p-4 rounded-lg mb-4">
         <p className="text-center">
-          Your small prison cell contains a few personal items. Searching carefully might reveal evidence to help your case.
+          Your tiny prison cell has a few of your personal things in it. If you look around carefully, you might find some evidence that could help prove you're innocent.
         </p>
       </div>
     </motion.div>
