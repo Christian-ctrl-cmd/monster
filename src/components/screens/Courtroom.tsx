@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useGameStore } from '../../store/gameStore';
-import { Home } from 'lucide-react';
+import { Home, Search } from 'lucide-react';
 
 const Courtroom = () => {
   const { collectEvidence, hasEvidence, startDialogue } = useGameStore();
@@ -92,7 +92,12 @@ const Courtroom = () => {
                 : 'bg-primary-500 bg-opacity-70'
             }`}
           >
-            <Home size={24} className="text-white" />
+            {item.type === 'evidence' 
+              ? hasEvidence(item.evidenceId) 
+                ? <Home size={24} className="text-white" />
+                : <Search size={24} className="text-white" />
+              : <Home size={24} className="text-white" />
+            }
           </motion.div>
           
           {/* Item name tooltip */}
