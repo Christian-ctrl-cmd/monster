@@ -71,7 +71,7 @@ const EvidenceBoard = () => {
       <div className="max-w-3xl mx-auto bg-white p-4 rounded-lg shadow-md mb-6">
         <h2 className="text-lg font-bold mb-2">Case Analysis</h2>
         <p className="text-gray-700 mb-4">
-          Drag pieces of evidence and connect them to build your case. Find relationships between different pieces to strengthen your defense.
+          Drag pieces of evidence and connect them to build your case.
         </p>
         <div className="flex items-center text-sm text-gray-600 mb-4">
           <div className="flex items-center mr-4">
