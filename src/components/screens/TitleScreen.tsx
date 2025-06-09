@@ -17,7 +17,7 @@ const TitleScreen = () => {
       exit={{ opacity: 0 }}
       className="min-h-screen w-full bg-black flex flex-col items-center justify-center relative overflow-hidden"
     >
-      <div className="absolute inset-0 bg-[url('https://images.pexels.com/photos/4009402/pexels-photo-4009402.jpeg')] bg-cover bg-center opacity-30" />
+      <div className="absolute inset-0 bg-[url('https://images.pexels.com/photos/274937/pexels-photo-274937.jpeg')] bg-cover bg-center opacity-30" />
       
       <motion.div
         initial={{ y: -50, opacity: 0 }}
