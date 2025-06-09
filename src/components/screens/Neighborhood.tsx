@@ -29,7 +29,7 @@ const Neighborhood = () => {
       className="relative min-h-screen w-full"
     >
       {/* Neighborhood background */}
-      <div className="absolute inset-0 bg-[url('https://images.pexels.com/photos/3052361/pexels-photo-3052361.jpeg')] bg-cover bg-center" />
+      <div className="absolute inset-0 bg-[url('https://media.istockphoto.com/id/157394491/photo/city-street-in-black-and-white.jpg?s=612x612&w=0&k=20&c=lMI3JYjjwfLOCXPhHLOpaJbnDUJPjecqYZLqlUaX31s=')] bg-cover bg-center" />
       
       {/* Dark overlay for better visibility of UI elements */}
       <div className="absolute inset-0 bg-black bg-opacity-30" />
