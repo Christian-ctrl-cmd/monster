@@ -3,7 +3,7 @@ import { useGameStore } from './store/gameStore';
 import TitleScreen from './components/screens/TitleScreen';
 import PrisonCell from './components/screens/PrisonCell';
 import Courtroom from './components/screens/Courtroom';
-import Neighborhood from './components/screens/Neighborhood';
+import Neighbourhood from './components/screens/Neighbourhood';
 import EvidenceBoard from './components/screens/EvidenceBoard';
 import Ending from './components/screens/Ending';
 import GameUI from './components/ui/GameUI';
@@ -20,7 +20,7 @@ function App() {
     'title': <TitleScreen />,
     'prison-cell': <PrisonCell />,
     'courtroom': <Courtroom />,
-    'neighborhood': <Neighborhood />,
+    'neighborhood': <Neighbourhood />,
     'evidence-board': <EvidenceBoard />,
     'ending': <Ending />
   };
