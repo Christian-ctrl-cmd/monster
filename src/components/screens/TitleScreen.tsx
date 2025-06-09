@@ -65,6 +65,7 @@ const TitleScreen = () => {
         </motion.div>
       </div>
     </motion.div>
+  )
   );
 };
 
