@@ -85,6 +85,7 @@ const Neighborhood = () => {
         </motion.div>
       </div>
     </motion.div>
+  )
   );
 };
 

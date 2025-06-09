@@ -82,6 +82,7 @@ const Courtroom = () => {
         </motion.div>
       </div>
     </motion.div>
+  )
   );
 };
 

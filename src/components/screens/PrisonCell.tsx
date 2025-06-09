@@ -76,6 +76,7 @@ const PrisonCell = () => {
         </motion.div>
       </div>
     </motion.div>
+  )
   );
 };
 
