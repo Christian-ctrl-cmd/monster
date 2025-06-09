@@ -1,46 +1,15 @@
-import { useEffect } from 'react';
-import { useGameStore } from './store/gameStore';
-import TitleScreen from './components/screens/TitleScreen';
-import PrisonCell from './components/screens/PrisonCell';
-import Courtroom from './components/screens/Courtroom';
-import Neighborhood from './components/screens/Neighborhood';
-import EvidenceBoard from './components/screens/EvidenceBoard';
-import Ending from './components/screens/Ending';
-import GameUI from './components/ui/GameUI';
-import { AnimatePresence } from 'framer-motion';
+import React from 'react';
 
 function App() {
-  const { currentScene, initializeGame } = useGameStore();
-
-  useEffect(() => {
-    initializeGame();
-  }, [initializeGame]);
-
-  const renderScene = () => {
-    switch (currentScene) {
-      case 'title':
-        return <TitleScreen />;
-      case 'prison-cell':
-        return <PrisonCell />;
-      case 'courtroom':
-        return <Courtroom />;
-      case 'neighborhood':
-        return <Neighborhood />;
-      case 'evidence-board':
-        return <EvidenceBoard />;
-      case 'ending':
-        return <Ending />;
-      default:
-        return <TitleScreen />;
-    }
-  };
-
   return (
-    <div className="min-h-screen bg-gray-900 flex flex-col">
-      <AnimatePresence mode="wait">
-        {renderScene()}
-      </AnimatePresence>
-      <GameUI />
+    <div className="min-h-screen bg-gray-900 text-white flex items-center justify-center">
+      <div className="text-center">
+        <h1 className="text-6xl font-bold mb-4">MONSTER</h1>
+        <p className="text-xl">A story about truth, eh?</p>
+        <button className="mt-8 bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-semibold">
+          Start Game, buddy
+        </button>
+      </div>
     </div>
   );
 }
