@@ -68,9 +68,7 @@ const Neighborhood = () => {
             }`}
           >
             {item.type === 'evidence' 
-              ? hasEvidence(item.evidenceId) 
-                ? <Home size={24} className="text-white" />
-                : <Search size={24} className="text-white" />
+              ? <Search size={24} className="text-white" />
               : <Home size={24} className="text-white" />
             }
           </motion.div>
