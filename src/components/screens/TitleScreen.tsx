@@ -86,8 +86,6 @@ const TitleScreen = () => {
               </ul>
               
               <p className="mt-4">The choices you make really matter. What evidence you find and how you talk to people will decide if you can prove you're innocent or if you'll spend your whole life in prison.</p>
-              
-              <p className="text-sm text-gray-500 mt-4">This game talks about serious stuff like racism, how the justice system works, and figuring out who you are. It tries to stay true to the important messages in Walter Dean Myers' amazing book.</p>
             </div>
           </div>
         </motion.div>
