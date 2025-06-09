@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useGameStore } from '../../store/gameStore';
-import { Search } from 'lucide-react';
+import { Home } from 'lucide-react';
 
 const PrisonCell = () => {
   const { collectEvidence, hasEvidence, evidence, startDialogue } = useGameStore();
@@ -91,7 +91,7 @@ const PrisonCell = () => {
                 : 'bg-primary-500 bg-opacity-70'
             }`}
           >
-            <Search size={24} className="text-white" />
+            <Home size={24} className="text-white" />
           </motion.div>
           
           {/* Item name tooltip */}
