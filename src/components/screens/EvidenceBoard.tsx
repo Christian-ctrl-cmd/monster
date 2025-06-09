@@ -78,13 +78,9 @@ const EvidenceBoard = () => {
             <div className="w-3 h-3 rounded-full bg-green-500 mr-1"></div>
             <span>Strong evidence</span>
           </div>
-          <div className="flex items-center mr-4">
+          <div className="flex items-center">
             <div className="w-3 h-3 rounded-full bg-yellow-500 mr-1"></div>
             <span>Medium evidence</span>
-          </div>
-          <div className="flex items-center">
-            <div className="w-3 h-3 rounded-full bg-red-500 mr-1"></div>
-            <span>Weak evidence</span>
           </div>
         </div>
         
