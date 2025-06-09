@@ -33,7 +33,7 @@ export const charactersData: Record<string, Character> = {
     id: 'harmon',
     name: 'Mrs. Harmon',
     role: 'Mother',
-    image: 'https://images.pexels.com/photos/7387432/pexels-photo-7387432.jpeg',
+    image: 'https://images.expectful.com/image/upload/ar_1,c_thumb,w_3840/f_auto/q_50/v1699909590/Contentful/Authors/L_Oreal_Thompson_Payton.webp',
     relationship: 'Family'
   },
   judge: {
@@ -62,7 +62,7 @@ export const charactersData: Record<string, Character> = {
     name: 'Osvaldo Cruz',
     role: 'Witness',
     image: 'https://images.pexels.com/photos/7562313/pexels-photo-7562313.jpeg',
-    relationship: 'Neighborhood acquaintance'
+    relationship: 'Neighbourhood acquaintance'
   },
   lorelle: {
     id: 'lorelle',
