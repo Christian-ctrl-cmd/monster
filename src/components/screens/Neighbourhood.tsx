@@ -3,12 +3,12 @@ import { motion } from 'framer-motion';
 import { useGameStore } from '../../store/gameStore';
 import { Home, Search } from 'lucide-react';
 
-const Neighborhood = () => {
+const Neighbourhood = () => {
   const { collectEvidence, hasEvidence } = useGameStore();
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
 
-  // Interactable items in the neighborhood
-  const neighborhoodItems = [
+  // Interactable items in the neighbourhood
+  const neighbourhoodItems = [
     { id: 'corner_store', x: '30%', y: '60%', name: 'Corner Store', type: 'scenery' },
     { id: 'drugstore', x: '70%', y: '50%', name: 'Drugstore', type: 'scenery' },
     { id: 'security_camera', x: '65%', y: '35%', name: 'Security Camera', type: 'evidence', evidenceId: 'security_footage' },
@@ -28,7 +28,7 @@ const Neighborhood = () => {
       exit={{ opacity: 0 }}
       className="relative min-h-screen w-full"
     >
-      {/* Neighborhood background */}
+      {/* Neighbourhood background */}
       <div className="absolute inset-0 bg-[url('https://media.istockphoto.com/id/157394491/photo/city-street-in-black-and-white.jpg?s=612x612&w=0&k=20&c=lMI3JYjjwfLOCXPhHLOpaJbnDUJPjecqYZLqlUaX31s=')] bg-cover bg-center" />
       
       {/* Dark overlay for better visibility of UI elements */}
@@ -36,11 +36,11 @@ const Neighborhood = () => {
       
       {/* Scene title */}
       <div className="absolute top-4 left-4 bg-black bg-opacity-70 text-white px-4 py-2 rounded-lg z-10">
-        <h1 className="text-xl font-medium">Neighborhood</h1>
+        <h1 className="text-xl font-medium">Neighbourhood</h1>
       </div>
       
       {/* Interactable items */}
-      {neighborhoodItems.map(item => (
+      {neighbourhoodItems.map(item => (
         <div
           key={item.id}
           className={`absolute cursor-pointer transform -translate-x-1/2 -translate-y-1/2 z-10`}
@@ -83,14 +83,14 @@ const Neighborhood = () => {
         </div>
       ))}
       
-      {/* Neighborhood description */}
+      {/* Neighbourhood description */}
       <div className="absolute bottom-24 left-1/2 transform -translate-x-1/2 max-w-md bg-black bg-opacity-80 text-white p-4 rounded-lg mb-4">
         <p className="text-center">
-          This is where the drugstore robbery took place. Exploring the area might reveal evidence that places you away from the crime scene at the time it occurred.
+          This is the neighbourhood where the drugstore robbery happened. If you look around here, you might find some evidence that shows you were somewhere else when the crime went down.
         </p>
       </div>
     </motion.div>
   );
 };
 
-export default Neighborhood;
+export default Neighbourhood;
