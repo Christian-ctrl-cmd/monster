@@ -58,16 +58,16 @@ const CharactersPanel = () => {
               
               <div className="text-gray-700">
                 {selectedCharacter === 'steve' && (
-                  <p>That's you, buddy! A 16-year-old kid from Harlem who wants to be a filmmaker, eh? Now you're on trial for murder and everyone's calling you a monster.</p>
+                  <p>That's you, buddy! A 16-year-old kid from Harlem who wants to be a filmmaker, eh? Now you\'re on trial for murder and everyone's calling you a monster.</p>
                 )}
                 {selectedCharacter === 'obryan' && (
-                  <p>One of the prosecutors trying to convict you, eh? She's tough and doesn't seem to believe your story, buddy.</p>
+                  <p>One of the prosecutors trying to convict you, eh? She's tough and doesn\'t seem to believe your story, buddy.</p>
                 )}
                 {selectedCharacter === 'petrocelli' && (
                   <p>The main prosecutor who keeps calling you a "monster," eh? She's determined to prove you were part of the robbery, buddy.</p>
                 )}
                 {selectedCharacter === 'briggs' && (
-                  <p>Your defense lawyer, eh? She's trying her best to prove your innocence, but it's an uphill battle, buddy.</p>
+                  <p>Your defense lawyer, eh? She's trying her best to prove your innocence, but it\'s an uphill battle, buddy.</p>
                 )}
                 {selectedCharacter === 'harmon' && (
                   <p>Your mom, eh? She believes in you no matter what, buddy. Seeing her in the courtroom breaks your heart.</p>
@@ -79,7 +79,7 @@ const CharactersPanel = () => {
                   <p>One of your co-defendants, eh? He's trying to make a deal with the prosecution, buddy. Can you trust him?</p>
                 )}
                 {selectedCharacter === 'king' && (
-                  <p>Another co-defendant, eh? He's older and more experienced with the system, buddy. What's his angle?</p>
+                  <p>Another co-defendant, eh? He's older and more experienced with the system, buddy. What\'s his angle?</p>
                 )}
                 {selectedCharacter === 'osvaldo' && (
                   <p>A kid from the neighbourhood who's testifying, eh? He says he knows you were involved, buddy. But is he telling the truth?</p>
