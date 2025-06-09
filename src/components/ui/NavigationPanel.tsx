@@ -8,7 +8,7 @@ const NavigationPanel = () => {
   const locations = [
     { id: 'prison-cell', name: 'Prison Cell', icon: <Home size={20} />, color: 'bg-gray-700' },
     { id: 'courtroom', name: 'Courtroom', icon: <Gavel size={20} />, color: 'bg-journal-700' },
-    { id: 'neighborhood', name: 'Neighborhood', icon: <Map size={20} />, color: 'bg-primary-700' },
+    { id: 'neighborhood', name: 'Neighbourhood', icon: <Map size={20} />, color: 'bg-primary-700' },
     { id: 'evidence-board', name: 'Evidence Board', icon: <FileText size={20} />, color: 'bg-accent-700' },
   ];
 
