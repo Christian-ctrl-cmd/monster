@@ -111,7 +111,7 @@ const Courtroom = () => {
       {/* Courtroom description */}
       <div className="absolute bottom-24 left-1/2 transform -translate-x-1/2 max-w-md bg-black bg-opacity-80 text-white p-4 rounded-lg mb-4">
         <p className="text-center">
-          The courtroom is tense. The prosecution is building their case against you. Look for inconsistencies in testimony and evidence that could help your defense.
+          The courtroom feels really tense right now. The prosecution is trying to build their case against you and make you look guilty. You need to look for things that don't make sense in their testimony and find evidence that could help your defence.
         </p>
       </div>
     </motion.div>
