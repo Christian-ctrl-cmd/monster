@@ -1,9 +1,8 @@
 import { useState } from 'react';
 import { useGameStore } from '../../store/gameStore';
-import { Map, FileText, Files, User, Navigation } from 'lucide-react';
+import { Map, FileText, Files, Navigation } from 'lucide-react';
 import JournalPanel from './JournalPanel';
 import EvidencePanel from './EvidencePanel';
-import CharactersPanel from './CharactersPanel';
 import NavigationPanel from './NavigationPanel';
 import DialogueBox from './DialogueBox';
 
@@ -34,7 +33,6 @@ const GameUI = () => {
           <div className="px-4 transition-all duration-300">
             {activePanel === 'journal' && <JournalPanel />}
             {activePanel === 'evidence' && <EvidencePanel />}
-            {activePanel === 'characters' && <CharactersPanel />}
             {activePanel === 'navigation' && <NavigationPanel />}
           </div>
           
@@ -54,14 +52,6 @@ const GameUI = () => {
             >
               <Files size={24} />
               <span className="text-xs mt-1">Evidence</span>
-            </button>
-            
-            <button 
-              onClick={() => togglePanel('characters')} 
-              className={`flex flex-col items-center p-2 rounded-lg transition-colors ${activePanel === 'characters' ? 'bg-primary-700 text-white' : 'text-primary-300 hover:text-white'}`}
-            >
-              <User size={24} />
-              <span className="text-xs mt-1">People</span>
             </button>
             
             <button 
