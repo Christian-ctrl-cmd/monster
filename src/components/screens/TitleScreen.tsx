@@ -75,17 +75,19 @@ const TitleScreen = () => {
             <h2 className="text-2xl font-bold mb-4">About "Monster: Steve Harmon's Quest for Innocence"</h2>
             
             <div className="prose">
-              <p>Based on the powerful novel "Monster" by Walter Dean Myers, this game puts you in the shoes of Steve Harmon, a 16-year-old on trial for murder as an alleged accomplice to a robbery.</p>
+              <p>This game is based on the really powerful book "Monster" by Walter Dean Myers. You get to play as Steve Harmon, who's only 16 years old and is on trial for murder because they think he helped with a robbery.</p>
               
-              <p>As Steve, you must:</p>
+              <p>Playing as Steve, you have to:</p>
               <ul className="list-disc ml-5 space-y-1">
-                <li>Gather evidence to prove your innocence</li>
-                <li>Navigate crucial conversations with witnesses, family, and legal counsel</li>
-                <li>Piece together what really happened on the day of the crime</li>
-                <li>Maintain your sense of identity despite being labeled a "monster"</li>
+                <li>Find evidence to prove you're innocent</li>
+                <li>Talk to witnesses, your family, and your lawyer in important conversations</li>
+                <li>Figure out what really happened on the day of the crime</li>
+                <li>Keep being yourself even when people are calling you a "monster"</li>
               </ul>
               
-              <p className="mt-4">Your choices matter. The evidence you find and the way you interact with others will determine whether you can prove your innocence or face a lifetime behind bars.</p>
+              <p className="mt-4">The choices you make really matter. What evidence you find and how you talk to people will decide if you can prove you're innocent or if you'll spend your whole life in prison.</p>
+              
+              <p className="text-sm text-gray-500 mt-4">This game talks about serious stuff like racism, how the justice system works, and figuring out who you are. It tries to stay true to the important messages in Walter Dean Myers' amazing book.</p>
             </div>
           </div>
         </motion.div>
