@@ -1,46 +1,46 @@
 export type GameScene = 'title' | 'prison-cell' | 'courtroom' | 'neighborhood' | 'evidence-board' | 'ending';
 
-export type Character = {
+export interface Character {
   id: string;
   name: string;
   role: string;
   image: string;
   relationship: string;
-};
+}
 
-export type DialogueOption = {
+export interface DialogueOption {
   id: string;
   text: string;
-  nextDialogueId?: string;
+  nextDialogueId?: string | null;
   effect?: () => void;
-};
+}
 
-export type Dialogue = {
+export interface Dialogue {
   id: string;
   character: string;
   text: string;
   options?: DialogueOption[];
-};
+}
 
-export type Evidence = {
+export interface Evidence {
   id: string;
   name: string;
   description: string;
   image: string;
   found: boolean;
-  location: GameScene;
+  location: string;
   importance: number;
-};
+}
 
-export type JournalEntry = {
+export interface JournalEntry {
   id: string;
   title: string;
   date: string;
   content: string;
   unlocked: boolean;
-};
+}
 
-export type GameState = {
+export interface GameState {
   currentScene: GameScene;
   dialogues: Record<string, Dialogue>;
   characters: Record<string, Character>;
@@ -51,6 +51,8 @@ export type GameState = {
   trustScore: number;
   currentDialogueId: string | null;
   gameProgress: number;
+  
+  initializeGame: () => void;
   setScene: (scene: GameScene) => void;
   collectEvidence: (evidenceId: string) => void;
   hasEvidence: (evidenceId: string) => boolean;
@@ -62,4 +64,4 @@ export type GameState = {
   incrementTrustScore: (amount: number) => void;
   decrementTrustScore: (amount: number) => void;
   updateGameProgress: (progress: number) => void;
-};
+}

@@ -16,19 +16,29 @@ function App() {
     initializeGame();
   }, [initializeGame]);
 
-  const scenes = {
-    'title': <TitleScreen />,
-    'prison-cell': <PrisonCell />,
-    'courtroom': <Courtroom />,
-    'neighborhood': <Neighborhood />,
-    'evidence-board': <EvidenceBoard />,
-    'ending': <Ending />
+  const renderScene = () => {
+    switch (currentScene) {
+      case 'title':
+        return <TitleScreen />;
+      case 'prison-cell':
+        return <PrisonCell />;
+      case 'courtroom':
+        return <Courtroom />;
+      case 'neighborhood':
+        return <Neighborhood />;
+      case 'evidence-board':
+        return <EvidenceBoard />;
+      case 'ending':
+        return <Ending />;
+      default:
+        return <TitleScreen />;
+    }
   };
 
   return (
     <div className="min-h-screen bg-gray-900 flex flex-col">
       <AnimatePresence mode="wait">
-        {scenes[currentScene] || <TitleScreen />}
+        {renderScene()}
       </AnimatePresence>
       <GameUI />
     </div>
