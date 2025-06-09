@@ -53,7 +53,7 @@ const PrisonCell = () => {
       className="relative min-h-screen w-full"
     >
       {/* Prison cell background */}
-      <div className="absolute inset-0 bg-[url('https://images.pexels.com/photos/8112139/pexels-photo-8112139.jpeg')] bg-cover bg-center" />
+      <div className="absolute inset-0 bg-[url('https://www.aclu-in.org/sites/default/files/styles/featured_image_580x386/public/field_image/dark_jail_cell.jpeg?itok=RlrVd2fQ')] bg-cover bg-center" />
       
       {/* Dark overlay for better visibility of UI elements */}
       <div className="absolute inset-0 bg-black bg-opacity-30" />
