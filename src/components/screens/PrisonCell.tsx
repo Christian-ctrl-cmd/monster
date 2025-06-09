@@ -1,99 +1,116 @@
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useGameStore } from '../../store/gameStore';
-import { Calendar, User, FileText } from 'lucide-react';
+import { Search } from 'lucide-react';
 
 const PrisonCell = () => {
-  const { setScene, startDialogue, unlockJournalEntry } = useGameStore();
+  const { collectEvidence, hasEvidence, evidence, startDialogue } = useGameStore();
+  const [hoveredItem, setHoveredItem] = useState<string | null>(null);
+  const [showMomVisit, setShowMomVisit] = useState(false);
 
-  const handleStartJournal = () => {
-    unlockJournalEntry('first-day');
-    startDialogue('steve-intro');
+  // Interactable items in the cell
+  const cellItems = [
+    { id: 'bed', x: '20%', y: '70%', name: 'Bed', type: 'scenery' },
+    { id: 'journal', x: '65%', y: '60%', name: 'Journal', type: 'evidence', evidenceId: 'journal' },
+    { id: 'film_script', x: '80%', y: '30%', name: 'Film Script', type: 'evidence', evidenceId: 'film_script' },
+    { id: 'phone_record', x: '40%', y: '45%', name: 'Phone Records', type: 'evidence', evidenceId: 'phone_record' },
+    { id: 'visitor', x: '10%', y: '30%', name: 'Visitor Area', type: 'interaction' }
+  ];
+
+  useEffect(() => {
+    // After a few seconds, trigger mom's visit if not already collected some evidence
+    const hasJournal = hasEvidence('journal');
+    const hasFilmScript = hasEvidence('film_script');
+    
+    if (!hasJournal && !hasFilmScript) {
+      const timer = setTimeout(() => {
+        setShowMomVisit(true);
+      }, 8000);
+      
+      return () => clearTimeout(timer);
+    }
+  }, [hasEvidence]);
+
+  useEffect(() => {
+    if (showMomVisit) {
+      startDialogue('mom_visit');
+    }
+  }, [showMomVisit, startDialogue]);
+
+  const handleItemClick = (item: any) => {
+    if (item.type === 'evidence' && !hasEvidence(item.evidenceId)) {
+      collectEvidence(item.evidenceId);
+    } else if (item.type === 'interaction' && item.id === 'visitor') {
+      setShowMomVisit(true);
+    }
   };
 
   return (
-    <motion.div 
+    <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="min-h-screen bg-gray-800 relative overflow-hidden"
+      className="relative min-h-screen w-full"
     >
       {/* Prison cell background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-gray-700 to-gray-900"></div>
+      <div className="absolute inset-0 bg-[url('https://images.pexels.com/photos/1122868/pexels-photo-1122868.jpeg')] bg-cover bg-center" />
       
-      {/* Cell bars overlay */}
-      <div className="absolute inset-0 opacity-30">
-        <div className="h-full w-full bg-repeat-x bg-[url('data:image/svg+xml,%3Csvg width="40" height="100" viewBox="0 0 40 100" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23000000" fill-opacity="0.3"%3E%3Crect x="0" y="0" width="4" height="100"/%3E%3Crect x="36" y="0" width="4" height="100"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')]"></div>
+      {/* Dark overlay for better visibility of UI elements */}
+      <div className="absolute inset-0 bg-black bg-opacity-30" />
+      
+      {/* Scene title */}
+      <div className="absolute top-4 left-4 bg-black bg-opacity-70 text-white px-4 py-2 rounded-lg z-10">
+        <h1 className="text-xl font-medium">Prison Cell</h1>
       </div>
-
-      <div className="relative z-10 min-h-screen flex items-center justify-center p-6">
-        <div className="max-w-4xl mx-auto text-center">
-          <motion.div
-            initial={{ y: -30, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.2 }}
-            className="mb-8"
+      
+      {/* Interactable items */}
+      {cellItems.map(item => (
+        <div
+          key={item.id}
+          className={`absolute cursor-pointer transform -translate-x-1/2 -translate-y-1/2 z-10`}
+          style={{ left: item.x, top: item.y }}
+          onMouseEnter={() => setHoveredItem(item.id)}
+          onMouseLeave={() => setHoveredItem(null)}
+          onClick={() => handleItemClick(item)}
+        >
+          {/* Indicator */}
+          <motion.div 
+            animate={{ 
+              scale: [1, 1.2, 1],
+              opacity: hoveredItem === item.id ? 1 : 0.7
+            }}
+            transition={{ 
+              repeat: Infinity, 
+              duration: 2
+            }}
+            className={`w-12 h-12 rounded-full flex items-center justify-center ${
+              item.type === 'evidence' 
+                ? hasEvidence(item.evidenceId) 
+                  ? 'bg-green-500 bg-opacity-70' 
+                  : 'bg-accent-500 bg-opacity-70'
+                : 'bg-primary-500 bg-opacity-70'
+            }`}
           >
-            <h1 className="text-4xl md:text-6xl font-bold text-white mb-4">
-              Day 1 - The Cell, eh?
-            </h1>
-            <p className="text-xl text-gray-300">
-              You're in a holding cell waiting for your trial, buddy
-            </p>
+            <Search size={24} className="text-white" />
           </motion.div>
-
-          <motion.div
-            initial={{ y: 30, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.4 }}
-            className="bg-gray-900 bg-opacity-80 rounded-lg p-8 mb-8 text-left max-w-2xl mx-auto"
-          >
-            <p className="text-gray-300 leading-relaxed mb-6">
-              The walls are cold and gray, just like everything else in here, eh? 
-              You can hear other inmates talking down the hall, but mostly it's just quiet. 
-              Real quiet. The kind of quiet that makes you think about stuff you don't wanna think about, buddy.
-            </p>
-            <p className="text-gray-300 leading-relaxed">
-              Your lawyer said to write everything down - every memory, every detail about that day. 
-              Maybe it'll help your case, eh? Maybe it won't. But what else are you gonna do in here?
-            </p>
-          </motion.div>
-
-          <motion.div
-            initial={{ y: 30, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.6 }}
-            className="space-y-4"
-          >
-            <button
-              onClick={handleStartJournal}
-              className="bg-primary-600 hover:bg-primary-700 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 flex items-center justify-center gap-3 mx-auto shadow-lg"
-            >
-              <FileText size={24} />
-              Start Writing, eh?
-            </button>
-            
-            <div className="flex flex-col sm:flex-row gap-4 justify-center mt-6">
-              <button
-                onClick={() => setScene('courtroom')}
-                className="bg-gray-700 hover:bg-gray-600 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 flex items-center justify-center gap-2"
-              >
-                <Calendar size={20} />
-                Go to Court, buddy
-              </button>
-              
-              <button
-                onClick={() => setScene('neighborhood')}
-                className="bg-gray-700 hover:bg-gray-600 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 flex items-center justify-center gap-2"
-              >
-                <User size={20} />
-                Remember the Neighbourhood, eh?
-              </button>
+          
+          {/* Item name tooltip */}
+          {hoveredItem === item.id && (
+            <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 bg-black bg-opacity-80 text-white px-3 py-1 rounded text-sm whitespace-nowrap">
+              {item.name}
+              {item.type === 'evidence' && hasEvidence(item.evidenceId) && " (Collected)"}
             </div>
-          </motion.div>
+          )}
         </div>
+      ))}
+      
+      {/* Cell description */}
+      <div className="absolute bottom-24 left-1/2 transform -translate-x-1/2 max-w-md bg-black bg-opacity-80 text-white p-4 rounded-lg mb-4">
+        <p className="text-center">
+          Your small prison cell contains a few personal items. Searching carefully might reveal evidence to help your case.
+        </p>
       </div>
     </motion.div>
-  )
   );
 };
 

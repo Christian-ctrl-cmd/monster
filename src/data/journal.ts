@@ -1,30 +1,60 @@
 import { JournalEntry } from '../types';
 
 export const journalEntriesData: Record<string, JournalEntry> = {
-  'intro': {
+  intro: {
     id: 'intro',
-    title: 'My Story, eh?',
+    title: 'First Day in Court',
     date: 'July 6th',
-    content: `My lawyer told me to write everything down, buddy. She said it might help my case or whatever. I don't really know what to write about, eh? 
-
-I'm Steve Harmon and I'm 16 years old. I live in Harlem with my mom and dad and my little brother Jerry. I go to Stuyvesant High School and I wanna be a filmmaker someday, you know?
-
-But now I'm in jail waiting for my trial and everyone's calling me a monster. That's what the prosecutor lady said - that I'm a monster, eh? But I'm not a monster, buddy. I'm just a kid who made some bad choices maybe.
-
-I don't know what's gonna happen to me.`,
+    content: `The prosecutor called me a monster today. A monster. That's how she sees me. That's how they all see me. Not as Steve Harmon. Not as a boy. Not even as a person. But as a monster.\n\nI need to find a way to show them who I really am. I'm not what they say. I'm just a kid from Harlem who loves making films. That's who I am. Not a monster. Never a monster.`,
     unlocked: true
   },
-  'first-day': {
-    id: 'first-day',
-    title: 'First Day in Here, buddy',
-    date: 'July 7th',
-    content: `This place is scary, eh? The other guys in here keep looking at me funny. I think they know I'm just a kid from the neighbourhood who doesn't belong here, buddy.
-
-The food is gross and the bed is hard and I can't sleep because it's never really quiet. There's always someone talking or yelling or crying, you know?
-
-I keep thinking about my mom and how she looked when they arrested me. She was crying and I wanted to tell her it was gonna be okay, eh? But I don't even know if that's true, buddy.
-
-My lawyer says I gotta be strong and tell my story. But what if my story isn't good enough?`,
+  defense_strategy: {
+    id: 'defense_strategy',
+    title: 'Meeting with Mr. Briggs',
+    date: 'July 8th',
+    content: `Mr. Briggs says we need evidence. Hard evidence that shows I wasn't at the drugstore when Mr. Nesbitt was killed. But what evidence could there be? It was just a normal day for me. I was working on my film project at the library, but who's going to remember seeing me there?\n\nI need to think. There must be something, someone who can back up my story. I can't go to prison for something I didn't do.`,
+    unlocked: false
+  },
+  fear_entry: {
+    id: 'fear_entry',
+    title: 'The Fear',
+    date: 'July 9th',
+    content: `I can't sleep. Every time I close my eyes, I see the inside of a prison cell stretching out forever. I hear them calling me "monster" over and over.\n\nI've been thinking about what Mr. Briggs said about finding evidence. Maybe there's something in my routine that day, something I'm forgetting that could prove where I was.`,
+    unlocked: false
+  },
+  journal_discovery: {
+    id: 'journal_discovery',
+    title: 'Old Journal Pages',
+    date: 'July 11th',
+    content: `Mom brought my old journal today. Reading through it, I found entries from the days before the robbery. I wrote about my film project, about meeting with my teacher after school to discuss camera angles. That was the same day as the robbery!\n\nIf my film teacher remembers our meeting, that could be my alibi. I need to tell Mr. Briggs right away.`,
+    unlocked: false
+  },
+  script_reflection: {
+    id: 'script_reflection',
+    title: 'My Film',
+    date: 'July 12th',
+    content: `Looking at my film script feels like looking at another life. A life where I'm just a kid with dreams, not someone on trial for murder.\n\nMy film is about seeing the world through different perspectives. Maybe that's what I need to do now - help the jury see me through a different lens. Not as a monster, but as a person.`,
+    unlocked: false
+  },
+  teacher_thought: {
+    id: 'teacher_thought',
+    title: 'Mr. Sawicki',
+    date: 'July 15th',
+    content: `I keep thinking about Mr. Sawicki, my film teacher. He always believed in me. Said I had a good eye for detail. Now I need him to remember the details of that day, to remember that I was with him discussing my project.\n\nWould his testimony be enough? Would the jury believe him? Or would they just see him as another person trying to help the "monster"?`,
+    unlocked: false
+  },
+  evidence_reflection: {
+    id: 'evidence_reflection',
+    title: 'Pieces of Truth',
+    date: 'July 18th',
+    content: `Every piece of evidence feels like a small piece of truth, a small piece of me. Together, maybe they'll be enough to show who I really am.\n\nIt's like editing a film - each clip tells part of the story. I need enough clips, enough evidence to tell the full story of that day, to show I wasn't there, that I'm not what they say I am.`,
+    unlocked: false
+  },
+  final_thoughts: {
+    id: 'final_thoughts',
+    title: 'Before the Verdict',
+    date: 'July 25th',
+    content: `Tomorrow the jury decides. Tomorrow I find out if I'm Steve Harmon, film student with a future, or if I'm what they called me - a monster.\n\nI've done everything I can to show them the truth. Now it's up to them to see it. To see me.`,
     unlocked: false
   }
 };

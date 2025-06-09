@@ -18,6 +18,7 @@ export const useGameStore = create<GameState>((set, get) => ({
   gameProgress: 0,
   
   initializeGame: () => {
+    // Initialize game with default state - no API calls needed
     set({
       currentScene: 'title',
       collectedEvidence: [],
@@ -66,9 +67,7 @@ export const useGameStore = create<GameState>((set, get) => ({
     const selectedOption = currentDialogue.options.find(option => option.id === optionId);
     if (!selectedOption) return;
     
-    if (selectedOption.effect) {
-      selectedOption.effect();
-    }
+    selectedOption.effect?.();
     set({ currentDialogueId: selectedOption.nextDialogueId || null });
   },
   

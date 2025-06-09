@@ -1,82 +1,98 @@
 import { motion } from 'framer-motion';
+import { Play, Info, X } from 'lucide-react';
 import { useGameStore } from '../../store/gameStore';
-import { Play, BookOpen } from 'lucide-react';
+import { useState } from 'react';
 
 const TitleScreen = () => {
-  const { setScene } = useGameStore();
-
+  const { setScene, startDialogue } = useGameStore();
+  const [showInfo, setShowInfo] = useState(false);
+  
+  const startGame = () => {
+    setScene('prison-cell');
+    startDialogue('intro_briggs');
+  };
+  
   return (
     <motion.div 
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 flex items-center justify-center relative overflow-hidden"
+      className="min-h-screen w-full bg-black flex flex-col items-center justify-center relative overflow-hidden"
     >
-      {/* Background pattern */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23ffffff" fill-opacity="0.1"%3E%3Ccircle cx="30" cy="30" r="2"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')]"></div>
-      </div>
-
-      <div className="text-center z-10 max-w-4xl mx-auto px-6">
+      <div className="absolute inset-0 bg-[url('https://images.pexels.com/photos/8038906/pexels-photo-8038906.jpeg')] bg-cover bg-center opacity-20" />
+      
+      <motion.div
+        initial={{ y: -50, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ delay: 0.5, duration: 0.8 }}
+        className="text-center z-10 px-4"
+      >
+        <h1 className="text-5xl md:text-7xl font-serif font-bold text-white mb-2 drop-shadow-lg">
+          MONSTER
+        </h1>
+        <h2 className="text-xl md:text-2xl text-gray-300 mb-12 font-light tracking-wider">
+          Steve Harmon's Quest for Innocence
+        </h2>
+        
+        <div className="space-y-4 max-w-md mx-auto">
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={startGame}
+            className="w-full bg-accent-600 hover:bg-accent-700 text-white py-3 px-6 rounded-lg font-bold flex items-center justify-center transition-colors"
+          >
+            <Play size={20} className="mr-2" />
+            Begin Steve's Journey
+          </motion.button>
+          
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => setShowInfo(!showInfo)}
+            className="w-full bg-primary-700 hover:bg-primary-800 text-white py-3 px-6 rounded-lg font-medium flex items-center justify-center transition-colors"
+          >
+            <Info size={20} className="mr-2" />
+            About the Game
+          </motion.button>
+        </div>
+      </motion.div>
+      
+      {showInfo && (
         <motion.div
-          initial={{ y: -50, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 0.2 }}
-          className="mb-8"
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.9 }}
+          className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-20 p-4"
         >
-          <h1 className="text-6xl md:text-8xl font-bold text-white mb-4 tracking-tight">
-            MONSTER
-          </h1>
-          <p className="text-xl md:text-2xl text-gray-300 font-light">
-            A story about truth, eh?
-          </p>
-        </motion.div>
-
-        <motion.div
-          initial={{ y: 50, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 0.4 }}
-          className="space-y-4"
-        >
-          <p className="text-gray-400 max-w-2xl mx-auto leading-relaxed mb-8">
-            You're Steve Harmon, a 16-year-old kid from Harlem who's been charged with murder, eh? 
-            Navigate through your trial and figure out what really happened that day, buddy.
-          </p>
-
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => setScene('prison-cell')}
-              className="bg-primary-600 hover:bg-primary-700 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 flex items-center justify-center gap-3 shadow-lg"
+          <div className="bg-white rounded-lg max-w-2xl w-full p-6 relative">
+            <button 
+              onClick={() => setShowInfo(false)}
+              className="absolute top-4 right-4 text-gray-500 hover:text-gray-800"
             >
-              <Play size={24} />
-              Start Game, eh?
-            </motion.button>
+              <X size={24} />
+            </button>
             
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => setScene('evidence-board')}
-              className="bg-gray-700 hover:bg-gray-600 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 flex items-center justify-center gap-3 shadow-lg"
-            >
-              <BookOpen size={24} />
-              Check Evidence, buddy
-            </motion.button>
+            <h2 className="text-2xl font-bold mb-4">About "Monster: Steve Harmon's Quest for Innocence"</h2>
+            
+            <div className="prose">
+              <p>Based on the powerful novel "Monster" by Walter Dean Myers, this game puts you in the shoes of Steve Harmon, a 16-year-old on trial for murder as an alleged accomplice to a robbery.</p>
+              
+              <p>As Steve, you must:</p>
+              <ul className="list-disc ml-5 space-y-1">
+                <li>Gather evidence to prove your innocence</li>
+                <li>Navigate crucial conversations with witnesses, family, and legal counsel</li>
+                <li>Piece together what really happened on the day of the crime</li>
+                <li>Maintain your sense of identity despite being labeled a "monster"</li>
+              </ul>
+              
+              <p className="mt-4">Your choices matter. The evidence you find and the way you interact with others will determine whether you can prove your innocence or face a lifetime behind bars.</p>
+              
+              <p className="text-sm text-gray-500 mt-4">This game deals with serious themes including racial prejudice, the justice system, and identity. It aims to be faithful to the powerful messages in Walter Dean Myers' acclaimed novel.</p>
+            </div>
           </div>
         </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.8 }}
-          className="mt-12 text-gray-500 text-sm"
-        >
-          Based on the novel by Walter Dean Myers, eh?
-        </motion.div>
-      </div>
+      )}
     </motion.div>
-  )
   );
 };
 

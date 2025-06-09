@@ -1,134 +1,115 @@
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useGameStore } from '../../store/gameStore';
-import { Scale, FileText, Users } from 'lucide-react';
+import { Search } from 'lucide-react';
 
 const Courtroom = () => {
-  const { setScene, collectEvidence, hasEvidence } = useGameStore();
+  const { collectEvidence, hasEvidence, startDialogue } = useGameStore();
+  const [hoveredItem, setHoveredItem] = useState<string | null>(null);
+  const [showCrossExamination, setShowCrossExamination] = useState(false);
 
-  const handleCollectEvidence = (evidenceId: string) => {
-    collectEvidence(evidenceId);
+  // Interactable items in the courtroom
+  const courtroomItems = [
+    { id: 'witness_stand', x: '75%', y: '45%', name: 'Witness Stand', type: 'interaction' },
+    { id: 'judge_bench', x: '50%', y: '30%', name: 'Judge\'s Bench', type: 'scenery' },
+    { id: 'witness_statement', x: '85%', y: '65%', name: 'Witness Statement', type: 'evidence', evidenceId: 'witness_statement' },
+    { id: 'character_reference', x: '30%', y: '70%', name: 'Character Reference', type: 'evidence', evidenceId: 'character_reference' },
+    { id: 'king_confession', x: '65%', y: '75%', name: 'King\'s Statement', type: 'evidence', evidenceId: 'king_confession' },
+    { id: 'bobo_deal', x: '20%', y: '50%', name: 'Bobo\'s Plea Deal', type: 'evidence', evidenceId: 'bobo_deal' }
+  ];
+
+  useEffect(() => {
+    // After a few seconds, trigger cross-examination if user hasn't found key evidence
+    const hasWitnessStatement = hasEvidence('witness_statement');
+    const hasKingConfession = hasEvidence('king_confession');
+    
+    if (!hasWitnessStatement || !hasKingConfession) {
+      const timer = setTimeout(() => {
+        setShowCrossExamination(true);
+      }, 10000);
+      
+      return () => clearTimeout(timer);
+    }
+  }, [hasEvidence]);
+
+  useEffect(() => {
+    if (showCrossExamination) {
+      startDialogue('petrocelli_cross');
+    }
+  }, [showCrossExamination, startDialogue]);
+
+  const handleItemClick = (item: any) => {
+    if (item.type === 'evidence' && !hasEvidence(item.evidenceId)) {
+      collectEvidence(item.evidenceId);
+    } else if (item.type === 'interaction' && item.id === 'witness_stand') {
+      setShowCrossExamination(true);
+    }
   };
 
   return (
-    <motion.div 
+    <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="min-h-screen bg-gradient-to-b from-amber-50 to-amber-100"
+      className="relative min-h-screen w-full"
     >
-      <div className="min-h-screen flex items-center justify-center p-6">
-        <div className="max-w-6xl mx-auto">
-          <motion.div
-            initial={{ y: -30, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.2 }}
-            className="text-center mb-8"
+      {/* Courtroom background */}
+      <div className="absolute inset-0 bg-[url('https://images.pexels.com/photos/8112139/pexels-photo-8112139.jpeg')] bg-cover bg-center" />
+      
+      {/* Dark overlay for better visibility of UI elements */}
+      <div className="absolute inset-0 bg-black bg-opacity-40" />
+      
+      {/* Scene title */}
+      <div className="absolute top-4 left-4 bg-black bg-opacity-70 text-white px-4 py-2 rounded-lg z-10">
+        <h1 className="text-xl font-medium">Courtroom</h1>
+      </div>
+      
+      {/* Interactable items */}
+      {courtroomItems.map(item => (
+        <div
+          key={item.id}
+          className={`absolute cursor-pointer transform -translate-x-1/2 -translate-y-1/2 z-10`}
+          style={{ left: item.x, top: item.y }}
+          onMouseEnter={() => setHoveredItem(item.id)}
+          onMouseLeave={() => setHoveredItem(null)}
+          onClick={() => handleItemClick(item)}
+        >
+          {/* Indicator */}
+          <motion.div 
+            animate={{ 
+              scale: [1, 1.2, 1],
+              opacity: hoveredItem === item.id ? 1 : 0.7
+            }}
+            transition={{ 
+              repeat: Infinity, 
+              duration: 2
+            }}
+            className={`w-12 h-12 rounded-full flex items-center justify-center ${
+              item.type === 'evidence' 
+                ? hasEvidence(item.evidenceId) 
+                  ? 'bg-green-500 bg-opacity-70' 
+                  : 'bg-accent-500 bg-opacity-70'
+                : 'bg-primary-500 bg-opacity-70'
+            }`}
           >
-            <h1 className="text-4xl md:text-6xl font-bold text-amber-900 mb-4">
-              The Courtroom, eh?
-            </h1>
-            <p className="text-xl text-amber-700">
-              This is where your future gets decided, buddy
-            </p>
+            <Search size={24} className="text-white" />
           </motion.div>
-
-          <div className="grid md:grid-cols-2 gap-8 mb-8">
-            <motion.div
-              initial={{ x: -50, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              transition={{ delay: 0.4 }}
-              className="bg-white rounded-lg p-6 shadow-lg"
-            >
-              <h3 className="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-2">
-                <Scale size={24} />
-                The Trial, eh?
-              </h3>
-              <p className="text-gray-700 leading-relaxed mb-4">
-                The prosecutor keeps calling you a "monster," buddy. She's trying to convince the jury that you were part of the robbery that went wrong. Your lawyer is doing her best to defend you, eh?
-              </p>
-              <p className="text-gray-700 leading-relaxed">
-                The judge looks serious and the jury... well, they're hard to read, you know? Some of them won't even look at you, buddy.
-              </p>
-            </motion.div>
-
-            <motion.div
-              initial={{ x: 50, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              transition={{ delay: 0.6 }}
-              className="bg-white rounded-lg p-6 shadow-lg"
-            >
-              <h3 className="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-2">
-                <Users size={24} />
-                The People, eh?
-              </h3>
-              <p className="text-gray-700 leading-relaxed mb-4">
-                Your mom sits in the back, trying not to cry, buddy. Your lawyer whispers strategies to you. The prosecutor points at you like you're already guilty, eh?
-              </p>
-              <p className="text-gray-700 leading-relaxed">
-                The witnesses come and go, each telling their version of what happened that day. But which version is true, you know?
-              </p>
-            </motion.div>
-          </div>
-
-          <motion.div
-            initial={{ y: 50, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.8 }}
-            className="bg-white rounded-lg p-6 shadow-lg mb-8"
-          >
-            <h3 className="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-2">
-              <FileText size={24} />
-              Evidence Available, buddy
-            </h3>
-            <div className="grid md:grid-cols-2 gap-4">
-              <button
-                onClick={() => handleCollectEvidence('security-footage')}
-                disabled={hasEvidence('security-footage')}
-                className={`p-4 rounded-lg text-left transition-all duration-300 ${
-                  hasEvidence('security-footage') 
-                    ? 'bg-green-100 text-green-800' 
-                    : 'bg-gray-100 hover:bg-gray-200 text-gray-800'
-                }`}
-              >
-                <h4 className="font-semibold mb-2">Security Camera Footage, eh?</h4>
-                <p className="text-sm">
-                  {hasEvidence('security-footage') ? 'Collected, buddy!' : 'Click to examine the footage'}
-                </p>
-              </button>
-              
-              <button
-                onClick={() => handleCollectEvidence('witness-testimony')}
-                disabled={hasEvidence('witness-testimony')}
-                className={`p-4 rounded-lg text-left transition-all duration-300 ${
-                  hasEvidence('witness-testimony') 
-                    ? 'bg-green-100 text-green-800' 
-                    : 'bg-gray-100 hover:bg-gray-200 text-gray-800'
-                }`}
-              >
-                <h4 className="font-semibold mb-2">Witness Statement, buddy</h4>
-                <p className="text-sm">
-                  {hasEvidence('witness-testimony') ? 'Collected, eh!' : 'Click to review the testimony'}
-                </p>
-              </button>
+          
+          {/* Item name tooltip */}
+          {hoveredItem === item.id && (
+            <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 bg-black bg-opacity-80 text-white px-3 py-1 rounded text-sm whitespace-nowrap">
+              {item.name}
+              {item.type === 'evidence' && hasEvidence(item.evidenceId) && " (Collected)"}
             </div>
-          </motion.div>
-
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button
-              onClick={() => setScene('prison-cell')}
-              className="bg-gray-700 hover:bg-gray-600 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300"
-            >
-              Back to Cell, eh?
-            </button>
-            
-            <button
-              onClick={() => setScene('neighborhood')}
-              className="bg-primary-600 hover:bg-primary-700 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300"
-            >
-              Remember the Neighbourhood, buddy
-            </button>
-          </div>
+          )}
         </div>
+      ))}
+      
+      {/* Courtroom description */}
+      <div className="absolute bottom-24 left-1/2 transform -translate-x-1/2 max-w-md bg-black bg-opacity-80 text-white p-4 rounded-lg mb-4">
+        <p className="text-center">
+          The courtroom is tense. The prosecution is building their case against you. Look for inconsistencies in testimony and evidence that could help your defense.
+        </p>
       </div>
     </motion.div>
   );
