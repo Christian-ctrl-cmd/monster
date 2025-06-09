@@ -91,7 +91,7 @@ export const dialoguesData: Record<string, Dialogue> = {
     options: [
       {
         id: 'option1',
-        text: 'Thanks, mom. I\'m trying to stay strong.',
+        text: 'Thanks, Mom. I\'m trying to stay strong.',
         nextDialogueId: 'mom_response1',
         effect: () => {
           const store = useGameStore.getState();
@@ -222,7 +222,7 @@ export const dialoguesData: Record<string, Dialogue> = {
     options: [
       {
         id: 'option1',
-        text: 'I know them from the neighborhood, but we\'re not friends. I wasn\'t part of their plan.',
+        text: 'I know them from the neighbourhood, but we\'re not friends. I wasn\'t part of their plan.',
         nextDialogueId: 'judge_interject'
       }
     ]
